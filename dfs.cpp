@@ -21,7 +21,7 @@ int main() {
     for (int i = 0; i < m; i++){
         cin >> a >> b;
 
-        ij[i]=a; ij[2*m-1-i]=b;
+        ij[i]=a-1; ij[2*m-1-i]=b-1;
     }
     for (int k=0; k < 2*m; k++){
         int i = ij[k];
@@ -29,10 +29,11 @@ int main() {
         hv[i] = k;
     }
     vector<int> hn = hv;
-    vs.push(v);
-    way.push_back(v);
+    vs.push(v-1);
+    //way.push_back(v);
     while (!vs.empty()){
         int cur_vertex = vs.top();
+        way.push_back(cur_vertex);
         int k;
         hp[cur_vertex] = 1;
         for (k=hn[cur_vertex]; k != -1; k = lv[k]){
@@ -42,16 +43,17 @@ int main() {
         if (k != -1){
             hn[cur_vertex] = lv[k];
             vs.push(ij[2*m-1-k]);
-            way.push_back(ij[2*m-1-k]);
+            //way.push_back(ij[2*m-1-k]);
         }
         else{
             if (!vs.empty())
                 vs.pop();
         }
     }
+    cout << way.size() << endl;
     for (int i = 0; i<way.size();i++)
     {
-        cout << way[i] << " ";
+        cout << way[i] +1<< " ";
     }
     cout << endl;
     /*for (int i = 0; i < n; i++)
